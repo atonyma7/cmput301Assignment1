@@ -1,44 +1,30 @@
 package com.example.cardiobook;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.time.LocalDate; // import the LocalDate class
-import java.util.Set;
+import java.time.LocalDate;
 
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MyActivity";
-    ListView measurementListView;
-    Button addButton;
-    Button deleteButton;
-    protected  measureListAdapter mAdapter;
-    ArrayList<Measurement> dataList;
-
-    SharedPreferences shared;
+    private  measureListAdapter mAdapter;
+    public SharedPreferences shared;
+    private measurementList dataList = new measurementList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +32,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         shared = getSharedPreferences("App_settings", MODE_PRIVATE);
 
-        measurementListView = findViewById(R.id.measure_list);
-        addButton = findViewById(R.id.add_button);
+        ListView measurementListView = findViewById(R.id.measure_list);
+        Button addButton = findViewById(R.id.add_button);
 
         LocalDate myObj = LocalDate.now(); // Create a date object
         System.out.println(myObj);
 
         loadData();
 
-        mAdapter = new measureListAdapter(this, dataList);
+        mAdapter = new measureListAdapter(this, dataList.getMeasurementList());
 
         measurementListView.setAdapter(mAdapter);
 
@@ -73,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //set what would happen when positive button is clicked
-                                mAdapter.remove(dataList.get(position));
+                                mAdapter.remove(dataList.getMeasurementList().get(position));
                                 saveData();
                                 mAdapter.notifyDataSetChanged();
                             }
@@ -110,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void editMeasurement(int position){
+    private void editMeasurement(int position){
         Intent i = new Intent (getApplicationContext(), addMeasurement.class);
-        Measurement clickedItem = dataList.get(position);
+        Measurement clickedItem = dataList.getMeasurementList().get(position);
         i.putExtra("EDITED", position);
         i.putExtra("DATE", clickedItem.getDate());
         i.putExtra("SYSTOLIC", clickedItem.getSysPressure());
@@ -145,13 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 final Measurement toAdd = new Measurement(newDate, newTime, newSystolic, newDiastolic, newBPM, newComment);
 
                 if (editedPosition > -1){
-                    dataList.remove(editedPosition);
-                    dataList.add(editedPosition, toAdd);
+                    dataList.getMeasurementList().remove(editedPosition);
+                    dataList.getMeasurementList().add(editedPosition, toAdd);
                     mAdapter.notifyDataSetChanged();
 
                 }
                 else {
-                    dataList.add(toAdd);
+                    dataList.getMeasurementList().add(toAdd);
                     mAdapter.notifyDataSetChanged();
                 }
                 saveData();
@@ -163,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(dataList);
+        String json = gson.toJson(dataList.getMeasurementList());
         editor.putString("task list", json);
         editor.apply();
     }
@@ -172,12 +158,10 @@ public class MainActivity extends AppCompatActivity {
         Gson gson = new Gson();
         String json = sharedPreferences.getString("task list", null);
         Type type = new TypeToken<ArrayList<Measurement>>() {}.getType();
-
-        dataList = gson.fromJson(json, type);
-        if (dataList == null){
-            dataList = new ArrayList<>();
-            Measurement [] measurements = {};
-            dataList.addAll(Arrays.asList(measurements));
+        ArrayList<Measurement> temp = gson.fromJson(json, type);
+        dataList.setMeasurementList(temp);
+        if (dataList.getMeasurementList() == null){
+            dataList = new measurementList();
         }
     }
 

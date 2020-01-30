@@ -15,14 +15,6 @@ public class Measurement {
     private String BPM;
     private String comment;
 
-    //constructor without the comment field
-    public Measurement(String date, String time, String sysPressure, String diaPressure, String BPM){
-        this.date = date;
-        this.time = time;
-        this.sysPressure = sysPressure;
-        this.diaPressure = diaPressure;
-        this.BPM = BPM;
-    }
 
     //constructor with the comment field
     public Measurement(String date, String time, String sysPressure, String diaPressure, String BPM, String comment){

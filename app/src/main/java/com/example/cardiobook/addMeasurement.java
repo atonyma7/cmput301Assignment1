@@ -18,23 +18,19 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class addMeasurement extends AppCompatActivity {
-    Button saveButton;
-    EditText systolicInput;
-    EditText diastolicInput;
-    EditText BPMInput;
-    EditText commentInput;
-    Measurement newMeasurement;
-    String date;
-    String time;
+    private EditText systolicInput;
+    private EditText diastolicInput;
+    private EditText BPMInput;
+    private EditText commentInput;
+    private String date;
+    private String time;
     private TextView mDisplayDate;
     private TextView mDisplayTime;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
-    int positionToEdit;
+    private int positionToEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +38,7 @@ public class addMeasurement extends AppCompatActivity {
         setContentView(R.layout.add_measurement_screen);
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        saveButton = findViewById(R.id.save_button);
+        Button saveButton = findViewById(R.id.save_button);
         systolicInput = findViewById(R.id.edit_systolic);
         diastolicInput = findViewById(R.id.edit_diastolic);
         BPMInput = findViewById(R.id.edit_BPM);
@@ -132,7 +128,7 @@ public class addMeasurement extends AppCompatActivity {
         });
     }
 
-    public String convertDate(int input) {
+    private String convertDate(int input) {
         if (input >= 10) {
             return String.valueOf(input);
         } else {
