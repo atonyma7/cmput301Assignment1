@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Add a new measurement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_systolic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter a positive integer"
+        app:layout_constraintBaseline_toBaselineOf="@+id/systolic_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/systolic_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="112dp"
+        android:text="Systolic Pressure:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_diastolic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="152dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter a positive integer"
+        app:layout_constraintBaseline_toBaselineOf="@+id/diastolic_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/diastolic_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="188dp"
+        android:text="Diastolic Pressure:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_BPM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Enter a positive integer"
+        app:layout_constraintBaseline_toBaselineOf="@+id/BPM_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Add comment"
+        app:layout_constraintBaseline_toBaselineOf="@+id/comment_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.808"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/BPM_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="264dp"
+        android:text="Beats per minute:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/comment_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="340dp"
+        android:text="Add a comment:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here to set a date"
+        app:layout_constraintBaseline_toBaselineOf="@+id/date_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/date_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="416dp"
+        android:text="Date:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here to set a time"
+        app:layout_constraintBaseline_toBaselineOf="@+id/time_tag"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/time_tag"
+        android:layout_width="124dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="492dp"
+        android:text="Time:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
