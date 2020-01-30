@@ -125,52 +125,9 @@ public class addMeasurement extends AppCompatActivity {
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                final String newSystolic = systolicInput.getText().toString();
-                final String newDiastolic = diastolicInput.getText().toString();
-                final String newBPM = BPMInput.getText().toString();
-                final String newDate = mDisplayDate.getText().toString();
-                final String newComment = commentInput.getText().toString();
-                final String newTime = mDisplayTime.getText().toString();
-
-                try {
-                    int sysInt = Integer.parseInt(newSystolic);
-                    int diaInt = Integer.parseInt(newDiastolic);
-                    int BPMInt = Integer.parseInt(newBPM);
+                if (checkedInputs()){
+                    sendInputs();
                 }
-                catch (Exception e){
-                    Toast.makeText(getApplicationContext(),"Your inputs are invalid!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (Integer.parseInt(newSystolic) < 0 || Integer.parseInt(newDiastolic) < 0 || Integer.parseInt(newBPM) < 0){
-                    Toast.makeText(getApplicationContext(),"Make sure your integers are positive!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (newDate.equals("Click here to set a date")){
-                    Toast.makeText(getApplicationContext(),"Enter a date!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if(newTime.equals("Click here to set a time")){
-                    Toast.makeText(getApplicationContext(),"Enter a time!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(newComment.length() > 20){
-                    Toast.makeText(getApplicationContext(),"Your comment is too long!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                Intent intent = new Intent();
-                intent.putExtra("EDITED", positionToEdit);
-                intent.putExtra("SYSTOLIC", newSystolic);
-                intent.putExtra("DIASTOLIC", newDiastolic);
-                intent.putExtra("BPM", newBPM);
-                intent.putExtra("DATE", newDate);
-                intent.putExtra("COMMENT", newComment);
-                intent.putExtra("TIME", newTime);
-                setResult(RESULT_OK, intent);
-                finish();
             }
         });
     }
@@ -183,4 +140,62 @@ public class addMeasurement extends AppCompatActivity {
         }
     }
 
+    private boolean checkedInputs(){
+        final String newSystolic = systolicInput.getText().toString();
+        final String newDiastolic = diastolicInput.getText().toString();
+        final String newBPM = BPMInput.getText().toString();
+        final String newDate = mDisplayDate.getText().toString();
+        final String newComment = commentInput.getText().toString();
+        final String newTime = mDisplayTime.getText().toString();
+
+        try {
+            int sysInt = Integer.parseInt(newSystolic);
+            int diaInt = Integer.parseInt(newDiastolic);
+            int BPMInt = Integer.parseInt(newBPM);
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Your inputs are invalid!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (Integer.parseInt(newSystolic) < 0 || Integer.parseInt(newDiastolic) < 0 || Integer.parseInt(newBPM) < 0){
+            Toast.makeText(getApplicationContext(),"Make sure your integers are positive!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (newDate.equals("Click here to set a date")){
+            Toast.makeText(getApplicationContext(),"Enter a date!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(newTime.equals("Click here to set a time")){
+            Toast.makeText(getApplicationContext(),"Enter a time!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(newComment.length() > 20){
+            Toast.makeText(getApplicationContext(),"Your comment is too long!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void sendInputs(){
+        final String newSystolic = systolicInput.getText().toString();
+        final String newDiastolic = diastolicInput.getText().toString();
+        final String newBPM = BPMInput.getText().toString();
+        final String newDate = mDisplayDate.getText().toString();
+        final String newComment = commentInput.getText().toString();
+        final String newTime = mDisplayTime.getText().toString();
+
+        Intent intent = new Intent();
+        intent.putExtra("EDITED", positionToEdit);
+        intent.putExtra("SYSTOLIC", newSystolic);
+        intent.putExtra("DIASTOLIC", newDiastolic);
+        intent.putExtra("BPM", newBPM);
+        intent.putExtra("DATE", newDate);
+        intent.putExtra("COMMENT", newComment);
+        intent.putExtra("TIME", newTime);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
 }
